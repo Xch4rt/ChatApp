@@ -21,6 +21,6 @@ public class LoginController {
     
     private void initComponents()
     {
-        
+        // Agregar actionlistener a los botones
     }
 }
