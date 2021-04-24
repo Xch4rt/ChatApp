@@ -8,6 +8,7 @@ package prog.uni.chatapp.views;
 import java.awt.BorderLayout;
 import javax.swing.JComponent;
 import prog.uni.chatapp.panels.Login;
+import prog.uni.chatapp.panels.controllers.LoginController;
 
 /**
  *
@@ -15,6 +16,7 @@ import prog.uni.chatapp.panels.Login;
  */
 public class ChatApp extends javax.swing.JFrame {
     private Login pnlLogin;
+    private LoginController loginController;
     /**
      * Creates new form ChatApp
      */
@@ -24,8 +26,13 @@ public class ChatApp extends javax.swing.JFrame {
     }
     private void addInitPanel()
     {
-        pnlLogin = new Login();
-        pnlLogin.setVisible(true);
+        if (pnlLogin == null)
+        {
+            pnlLogin = new Login();
+            loginController = new LoginController(pnlLogin);
+            //pnlLogin.setVisible(true);
+        }
+        
         addComponent(pnlLogin);
     }
     private void addComponent(JComponent component) {

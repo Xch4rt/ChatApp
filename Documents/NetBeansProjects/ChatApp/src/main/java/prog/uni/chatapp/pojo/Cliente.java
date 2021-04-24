@@ -18,12 +18,12 @@ import java.net.InetAddress;
 */
 public class Cliente {
     private String Nick;
-    private String IP_recep;
+    private InetAddress IP_recep;
     private InetAddress IP;
 
     public Cliente() {}
 
-    public Cliente(String Nick, String IP_recep, InetAddress IP) {
+    public Cliente(String Nick, InetAddress IP_recep, InetAddress IP) {
         this.Nick = Nick;
         this.IP_recep = IP_recep;
         this.IP = IP;
@@ -37,11 +37,11 @@ public class Cliente {
         this.Nick = Nick;
     }
 
-    public String getIP_recep() {
+    public InetAddress getIP_recep() {
         return IP_recep;
     }
 
-    public void setIP_recep(String IP_recep) {
+    public void setIP_recep(InetAddress IP_recep) {
         this.IP_recep = IP_recep;
     }
 
