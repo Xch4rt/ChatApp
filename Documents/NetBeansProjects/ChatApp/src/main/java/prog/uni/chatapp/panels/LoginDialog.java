@@ -5,54 +5,38 @@
  */
 package prog.uni.chatapp.panels;
 
+import java.awt.BorderLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JTextField;
+import prog.uni.chatapp.panels.controllers.LoginController;
 
 /**
  *
  * @author Freddy.Machado
  */
 public class LoginDialog extends javax.swing.JDialog {
-
+    private Login login;
+    private LoginController loginControler;
     /**
      * Creates new form LoginDialog
      */
     public LoginDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        addPanel();
     }
 
-    public JButton getBtnAccept() {
-        return btnAccept;
-    }
-
-    public void setBtnAccept(JButton btnAccept) {
-        this.btnAccept = btnAccept;
-    }
-
-    public JButton getBtnCancel() {
-        return btnCancel;
-    }
-
-    public void setBtnCancel(JButton btnCancel) {
-        this.btnCancel = btnCancel;
-    }
-
-    public JTextField getTxtIp() {
-        return txtIp;
-    }
-
-    public void setTxtIp(JTextField txtIp) {
-        this.txtIp = txtIp;
-    }
-
-    public JTextField getTxtUsername() {
-        return txtUsername;
-    }
-
-    public void setTxtUsername(JTextField txtUsername) {
-        this.txtUsername = txtUsername;
+    private void addPanel()
+    {
+        pnlInfo.removeAll();
+        if (login == null)
+        {
+            login = new Login();
+            loginControler = new LoginController(login);
+        }
+        pnlInfo.add(login, BorderLayout.CENTER);
+        validate();
+        repaint();
     }
 
     
@@ -71,59 +55,12 @@ public class LoginDialog extends javax.swing.JDialog {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
-        btnAccept = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        txtUsername = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        txtIp = new javax.swing.JTextField();
+        pnlInfo = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        btnAccept.setText("Accept");
-        jPanel1.add(btnAccept);
-
-        btnCancel.setText("Cancel");
-        jPanel1.add(btnCancel);
-
-        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
-
-        jPanel2.setLayout(new java.awt.GridBagLayout());
-
-        jLabel1.setText("Username:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        jPanel2.add(jLabel1, gridBagConstraints);
-
-        txtUsername.setMinimumSize(new java.awt.Dimension(7, 25));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 2.0;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        jPanel2.add(txtUsername, gridBagConstraints);
-
-        jLabel2.setText("Ip del receptor:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        jPanel2.add(jLabel2, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 2.0;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        jPanel2.add(txtIp, gridBagConstraints);
-
-        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+        pnlInfo.setLayout(new java.awt.BorderLayout());
+        getContentPane().add(pnlInfo, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -171,13 +108,6 @@ public class LoginDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAccept;
-    private javax.swing.JButton btnCancel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txtIp;
-    private javax.swing.JTextField txtUsername;
+    private javax.swing.JPanel pnlInfo;
     // End of variables declaration//GEN-END:variables
 }

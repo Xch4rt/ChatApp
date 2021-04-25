@@ -5,6 +5,7 @@
  */
 package prog.uni.chatapp.pojo;
 
+import java.io.Serializable;
 import java.net.InetAddress;
 
 /**
@@ -17,7 +18,7 @@ import java.net.InetAddress;
                             IP es un objeto InetAddress para acceder a la IP del usuario que enviara el msj
                             msg que es el mensaje que enviara el cliente A al cliente B
 */
-public class Cliente {
+public class Cliente implements Serializable {
     private String Nick;
     private InetAddress IP_recep;
     private InetAddress IP;

@@ -15,6 +15,8 @@ import prog.uni.chatapp.pojo.Cliente;
  *
  * @author Pablo
  */
+
+// EJECUTAR CADA VEZ QUE SE NECESITA PROBAR EL CLIENTE (cliente aun no sirve)
 public class Server implements Runnable {
     private Cliente clienteServer;
     private String nick, msg, ip;

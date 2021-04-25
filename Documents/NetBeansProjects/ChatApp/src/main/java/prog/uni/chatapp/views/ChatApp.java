@@ -13,7 +13,7 @@ import prog.uni.chatapp.panels.Login;
 import prog.uni.chatapp.panels.LoginDialog;
 import prog.uni.chatapp.panels.controllers.ChatController;
 import prog.uni.chatapp.panels.controllers.LoginController;
-import prog.uni.chatapp.panels.controllers.LoginDialogController;
+
 
 /**
  *
@@ -26,7 +26,7 @@ public class ChatApp extends javax.swing.JFrame {
     private Chat chat;
     private ChatController chatController;
     private LoginDialog loginDialog;
-    private LoginDialogController loginDialogController;
+    
     /**
      * Creates new form ChatApp
      */
@@ -34,26 +34,12 @@ public class ChatApp extends javax.swing.JFrame {
         initComponents();
         
     }
-    private void addInitPanel()
-    {
-        if (pnlLogin == null)
-        {
-            pnlLogin = new Login();
-            loginController = new LoginController(pnlLogin);
-            //pnlLogin.setVisible(true);
-        }
-        
-        addComponent(pnlLogin);
-    }
-    public void flag(boolean f)
-    {
-        addPnlChat(f);
-    }
+
     private void addPnlChat(boolean condition)
     {
         if (condition)
         {
-            chatfr.removeAll();
+            //chatfr.removeAll();
             if (chat == null)
             {
                 chat = new Chat();
@@ -61,21 +47,14 @@ public class ChatApp extends javax.swing.JFrame {
             }
         }
         System.out.println("TODO OK");
-       // addComponent(chat);
-        add(chat);
+        addComponent(chat);
     }
-    private void addComponent(JComponent component) {
-        pnlInfo.removeAll();
-        pnlInfo.add(component, BorderLayout.CENTER);
-        pnlInfo.repaint();
-        this.validate();
+    
+    public void flag(boolean f)
+    {
+        addPnlChat(f);
     }
-     private void addComponent(JDialog component) {
-        pnlInfo.removeAll();
-        pnlInfo.add(component);
-        pnlInfo.repaint();
-        this.validate();
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -115,13 +94,19 @@ public class ChatApp extends javax.swing.JFrame {
         {
             loginDialog = new LoginDialog(null,true);
             loginDialog.setVisible(true);
-            loginDialogController = new LoginDialogController(loginDialog);
+            flag(true);
+            //loginDialogController = new LoginDialogController(loginDialog);
             //pnlLogin.setVisible(true);
         }
         
         //addComponent(loginDialog);
     }//GEN-LAST:event_btnLoginActionPerformed
-
+    private void addComponent(JComponent component) {
+        pnlInfo.removeAll();
+        pnlInfo.add(component, BorderLayout.CENTER);
+        pnlInfo.repaint();
+        this.validate();
+    }
     /**
      * @param args the command line arguments
      */

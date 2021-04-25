@@ -25,6 +25,7 @@ public class Chat extends javax.swing.JPanel {
     public JButton getBtnSend() {
         return btnSend;
     }
+    
 
     public void setBtnSend(JButton btnSend) {
         this.btnSend = btnSend;
@@ -46,22 +47,7 @@ public class Chat extends javax.swing.JPanel {
         this.txtMessage = txtMessage;
     }
 
-    public JTextField getTxtTo() {
-        return txtTo;
-    }
 
-    public void setTxtTo(JTextField txtTo) {
-        this.txtTo = txtTo;
-    }
-
-    public JTextField getTxtUser() {
-        return txtUser;
-    }
-
-    public void setTxtUser(JTextField txtUser) {
-        this.txtUser = txtUser;
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -72,31 +58,17 @@ public class Chat extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
         pnlTxtMessage = new javax.swing.JPanel();
         txtMessage = new javax.swing.JTextField();
         btnSend = new javax.swing.JButton();
         pnltop = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtUser = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtTo = new javax.swing.JTextField();
-        pnlChats = new javax.swing.JPanel();
+        pnlCenter = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaMessages = new javax.swing.JTextArea();
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        setLayout(new java.awt.BorderLayout());
 
         pnlTxtMessage.setBackground(new java.awt.Color(153, 255, 255));
         pnlTxtMessage.setLayout(new java.awt.GridBagLayout());
@@ -112,6 +84,8 @@ public class Chat extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 9, 0, 9);
         pnlTxtMessage.add(btnSend, gridBagConstraints);
 
+        add(pnlTxtMessage, java.awt.BorderLayout.PAGE_END);
+
         pnltop.setBackground(new java.awt.Color(255, 255, 255));
         pnltop.setLayout(new java.awt.GridBagLayout());
 
@@ -124,15 +98,6 @@ public class Chat extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 6, 31);
         pnltop.add(jLabel1, gridBagConstraints);
 
-        txtUser.setEditable(false);
-        txtUser.setForeground(new java.awt.Color(0, 0, 0));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 10.0;
-        gridBagConstraints.weighty = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 6, 31);
-        pnltop.add(txtUser, gridBagConstraints);
-
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Para:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -141,55 +106,17 @@ public class Chat extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 6, 31);
         pnltop.add(jLabel2, gridBagConstraints);
 
-        txtTo.setEditable(false);
-        txtTo.setForeground(new java.awt.Color(0, 0, 0));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 10.0;
-        gridBagConstraints.weighty = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 6, 31);
-        pnltop.add(txtTo, gridBagConstraints);
+        add(pnltop, java.awt.BorderLayout.PAGE_START);
 
-        pnlChats.setBackground(new java.awt.Color(255, 255, 255));
+        pnlCenter.setLayout(new java.awt.BorderLayout());
 
         txtAreaMessages.setColumns(20);
         txtAreaMessages.setRows(5);
         jScrollPane1.setViewportView(txtAreaMessages);
 
-        javax.swing.GroupLayout pnlChatsLayout = new javax.swing.GroupLayout(pnlChats);
-        pnlChats.setLayout(pnlChatsLayout);
-        pnlChatsLayout.setHorizontalGroup(
-            pnlChatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
-        pnlChatsLayout.setVerticalGroup(
-            pnlChatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
-        );
+        pnlCenter.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlTxtMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnltop, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(pnlChats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pnltop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(pnlChats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(pnlTxtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        add(pnlCenter, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -197,14 +124,11 @@ public class Chat extends javax.swing.JPanel {
     private javax.swing.JButton btnSend;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JPanel pnlChats;
+    private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlTxtMessage;
     private javax.swing.JPanel pnltop;
     private javax.swing.JTextArea txtAreaMessages;
     private javax.swing.JTextField txtMessage;
-    private javax.swing.JTextField txtTo;
-    private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }
