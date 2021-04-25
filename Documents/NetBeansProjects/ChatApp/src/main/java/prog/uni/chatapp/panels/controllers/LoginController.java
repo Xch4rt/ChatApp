@@ -55,9 +55,8 @@ public class LoginController {
         
         cliente = new Cliente(nick, IP_recept, IP);
         System.out.println(cliente.toString());
-        System.out.println(IP_recept);
-        chatfr = new ChatApp();
-        this.chatfr.flag(nick.equals(null) && IP_recept.equals(null)); //Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException
+        //;
+        this.chatfr.flag(flag((nick == null && IP_recept == null) ? false:true)); //Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException
     }
     
 
