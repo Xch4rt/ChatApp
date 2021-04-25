@@ -110,6 +110,7 @@ public class Chat extends javax.swing.JPanel {
 
         pnlCenter.setLayout(new java.awt.BorderLayout());
 
+        txtAreaMessages.setEditable(false);
         txtAreaMessages.setColumns(20);
         txtAreaMessages.setRows(5);
         jScrollPane1.setViewportView(txtAreaMessages);

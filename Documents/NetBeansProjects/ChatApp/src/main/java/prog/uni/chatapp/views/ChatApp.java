@@ -5,12 +5,14 @@
  */
 package prog.uni.chatapp.views;
 
-import java.awt.BorderLayout;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
+import javax.swing.JDesktopPane;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import prog.uni.chatapp.panels.Chat;
+import prog.uni.chatapp.panels.IFChat;
 import prog.uni.chatapp.panels.Login;
 import prog.uni.chatapp.panels.LoginDialog;
+import prog.uni.chatapp.panels.controllers.ChatAppController;
 import prog.uni.chatapp.panels.controllers.ChatController;
 import prog.uni.chatapp.panels.controllers.LoginController;
 
@@ -22,38 +24,76 @@ import prog.uni.chatapp.panels.controllers.LoginController;
 public class ChatApp extends javax.swing.JFrame {
     private Login pnlLogin;
     private LoginController loginController;
+    
     private ChatApp chatfr;
     private Chat chat;
+    
     private ChatController chatController;
     private LoginDialog loginDialog;
+    
+    private IFChat internalFCht;
+    private ChatAppController chatControllerP;
     
     /**
      * Creates new form ChatApp
      */
     public ChatApp() {
         initComponents();
-        
+        this.setExtendedState(MAXIMIZED_BOTH);
+        chatControllerP = new ChatAppController(this);
     }
 
-    private void addPnlChat(boolean condition)
-    {
-        if (condition)
-        {
-            //chatfr.removeAll();
-            if (chat == null)
-            {
-                chat = new Chat();
-                chatController = new ChatController(chat);
-            }
-        }
-        System.out.println("TODO OK");
-        addComponent(chat);
+    public JDesktopPane getDkCont() {
+        return dkCont;
+    }
+
+    public void setDkCont(JDesktopPane dkCont) {
+        this.dkCont = dkCont;
+    }
+
+    public JMenuItem getMniClose() {
+        return mniClose;
+    }
+
+    public void setMniClose(JMenuItem mniClose) {
+        this.mniClose = mniClose;
+    }
+
+    public JMenuItem getMniLog() {
+        return mniLog;
+    }
+
+    public void setMniLog(JMenuItem mniLog) {
+        this.mniLog = mniLog;
+    }
+
+    public JMenu getMnuOptions() {
+        return mnuOptions;
+    }
+
+    public void setMnuOptions(JMenu mnuOptions) {
+        this.mnuOptions = mnuOptions;
     }
     
-    public void flag(boolean f)
-    {
-        addPnlChat(f);
-    }
+//    private void addPnlChat(boolean condition)
+//    {
+//        if (condition)
+//        {
+//            //chatfr.removeAll();
+//            if (chat == null)
+//            {
+//                chat = new Chat();
+//                chatController = new ChatController(chat);
+//            }
+//        }
+//        System.out.println("TODO OK");
+//
+//    }
+//    
+//    public void flag(boolean f)
+//    {
+//        addPnlChat(f);
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,49 +104,38 @@ public class ChatApp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlInfo = new javax.swing.JPanel();
-        btnLogin = new javax.swing.JButton();
+        dkCont = new javax.swing.JDesktopPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        mnuOptions = new javax.swing.JMenu();
+        mniLog = new javax.swing.JMenuItem();
+        mniClose = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
         setSize(new java.awt.Dimension(317, 485));
-        getContentPane().setLayout(new java.awt.BorderLayout());
+        getContentPane().add(dkCont, java.awt.BorderLayout.CENTER);
 
-        pnlInfo.setBackground(new java.awt.Color(255, 255, 255));
-        pnlInfo.setLayout(new java.awt.BorderLayout());
+        mnuOptions.setText("Options");
 
-        btnLogin.setText("Login");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
-            }
-        });
-        pnlInfo.add(btnLogin, java.awt.BorderLayout.LINE_START);
+        mniLog.setText("Log in");
+        mnuOptions.add(mniLog);
 
-        getContentPane().add(pnlInfo, java.awt.BorderLayout.CENTER);
+        mniClose.setText("Exit");
+        mnuOptions.add(mniClose);
+
+        jMenuBar1.add(mnuOptions);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
-         if (loginDialog == null)
-        {
-            loginDialog = new LoginDialog(null,true);
-            loginDialog.setVisible(true);
-            flag(true);
-            //loginDialogController = new LoginDialogController(loginDialog);
-            //pnlLogin.setVisible(true);
-        }
-        
-        //addComponent(loginDialog);
-    }//GEN-LAST:event_btnLoginActionPerformed
-    private void addComponent(JComponent component) {
-        pnlInfo.removeAll();
-        pnlInfo.add(component, BorderLayout.CENTER);
-        pnlInfo.repaint();
-        this.validate();
-    }
+//    private void addComponent(JComponent component) {
+//        pnlInfo.removeAll();
+//        pnlInfo.add(component, BorderLayout.CENTER); // aqui da vacio
+//        System.out.println(component.equals(null));
+//        pnlInfo.repaint();
+//        this.validate();
+//    }
     /**
      * @param args the command line arguments
      */
@@ -143,7 +172,10 @@ public class ChatApp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogin;
-    private javax.swing.JPanel pnlInfo;
+    private javax.swing.JDesktopPane dkCont;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem mniClose;
+    private javax.swing.JMenuItem mniLog;
+    private javax.swing.JMenu mnuOptions;
     // End of variables declaration//GEN-END:variables
 }

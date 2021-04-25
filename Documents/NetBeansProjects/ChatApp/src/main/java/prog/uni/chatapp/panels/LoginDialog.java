@@ -38,7 +38,7 @@ public class LoginDialog extends javax.swing.JDialog {
         validate();
         repaint();
     }
-
+    
     
 
    

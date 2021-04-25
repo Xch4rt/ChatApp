@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package prog.uni.chatapp.server;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -19,31 +21,51 @@ import prog.uni.chatapp.pojo.Cliente;
 // EJECUTAR CADA VEZ QUE SE NECESITA PROBAR EL CLIENTE (cliente aun no sirve)
 public class Server implements Runnable {
     private Cliente clienteServer;
-    private String nick, msg, ip;
+    private String msg;
+    private int port;
+    private PropertyChangeSupport pcs; //https://docs.oracle.com/javase/tutorial/uiswing/events/propertychangelistener.html
+    /*
+        Principal motivo de uso de clase es por el textfield o los dialogs
+    */
+    
+    
+    public void addPChangeListener(PropertyChangeListener a)
+    {
+        pcs.addPropertyChangeListener(a);
+    }
+    public void removePChangeListener(PropertyChangeListener a)
+    {
+        pcs.removePropertyChangeListener(a);
+    }
+
+    public Server(int port) {
+        this.port = port;
+        pcs = new PropertyChangeSupport(this);
+    }
+    
     @Override
     public void run() {
+        DataInputStream dis;
+        Socket mySocket;
         try {
             ServerSocket myServer = new ServerSocket(9999); // Espero que no tengan el puerto 9999 ocupado xd
             while (true)
             {
-                Socket mySocket = myServer.accept(); // Aceptamos las entradas de datos
-                ObjectInputStream packageData = new ObjectInputStream(mySocket.getInputStream());
+                mySocket = myServer.accept(); // Aceptamos las entradas de datos
                 
-                clienteServer = (Cliente) packageData.readObject();
+                dis = new DataInputStream(mySocket.getInputStream());
+                String msh = dis.readUTF();
+                pcs.firePropertyChange("Msg:", msg, msh);
                 
-                nick = clienteServer.getNick();
-                ip = clienteServer.getIP_recep().toString();
-                msg = clienteServer.getMsg();
                 
-                System.out.println("\nDe: "+nick+" "+msg+"para: "+ip);
+                
                 
                 mySocket.close();
             }
         } catch (IOException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
+        
     }
     
 }

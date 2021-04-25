@@ -36,13 +36,7 @@ public class Login extends javax.swing.JPanel {
         this.btnAccept = btnAccept;
     }
 
-    public JButton getBtnCancel() {
-        return btnCancel;
-    }
-
-    public void setBtnCancel(JButton btnCancel) {
-        this.btnCancel = btnCancel;
-    }
+    
 
     public JTextField getTxtIP() {
         return txtIP;
@@ -72,7 +66,6 @@ public class Login extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         btnAccept = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
@@ -82,10 +75,12 @@ public class Login extends javax.swing.JPanel {
         setLayout(new java.awt.BorderLayout());
 
         btnAccept.setText("Accept");
+        btnAccept.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAcceptActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnAccept);
-
-        btnCancel.setText("Cancel");
-        jPanel1.add(btnCancel);
 
         add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
@@ -123,10 +118,13 @@ public class Login extends javax.swing.JPanel {
         add(jPanel2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAcceptActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccept;
-    private javax.swing.JButton btnCancel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

@@ -5,8 +5,12 @@
  */
 package prog.uni.chatapp.pojo;
 
-import java.io.Serializable;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.InetAddress;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,7 +22,7 @@ import java.net.InetAddress;
                             IP es un objeto InetAddress para acceder a la IP del usuario que enviara el msj
                             msg que es el mensaje que enviara el cliente A al cliente B
 */
-public class Cliente implements Serializable {
+public class Cliente implements Runnable {
     private String Nick;
     private InetAddress IP_recep;
     private InetAddress IP;
@@ -73,6 +77,25 @@ public class Cliente implements Serializable {
     @Override
     public String toString() {
         return "Cliente{" + "Nick=" + Nick + ", IP_recep=" + IP_recep + ", IP=" + IP + '}';
+    }
+
+    @Override
+    public void run() {
+        try {
+            //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            
+            DataOutputStream dos;
+            
+            Socket mySocket = new Socket();
+            
+            dos = new DataOutputStream(mySocket.getOutputStream());
+            
+            dos.writeUTF(msg);
+            
+            mySocket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     
