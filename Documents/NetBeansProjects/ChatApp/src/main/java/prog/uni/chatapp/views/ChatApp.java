@@ -7,10 +7,13 @@ package prog.uni.chatapp.views;
 
 import java.awt.BorderLayout;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import prog.uni.chatapp.panels.Chat;
 import prog.uni.chatapp.panels.Login;
+import prog.uni.chatapp.panels.LoginDialog;
 import prog.uni.chatapp.panels.controllers.ChatController;
 import prog.uni.chatapp.panels.controllers.LoginController;
+import prog.uni.chatapp.panels.controllers.LoginDialogController;
 
 /**
  *
@@ -22,12 +25,14 @@ public class ChatApp extends javax.swing.JFrame {
     private ChatApp chatfr;
     private Chat chat;
     private ChatController chatController;
+    private LoginDialog loginDialog;
+    private LoginDialogController loginDialogController;
     /**
      * Creates new form ChatApp
      */
     public ChatApp() {
         initComponents();
-        addInitPanel();
+        
     }
     private void addInitPanel()
     {
@@ -56,11 +61,18 @@ public class ChatApp extends javax.swing.JFrame {
             }
         }
         System.out.println("TODO OK");
-        addComponent(chat);
+       // addComponent(chat);
+        add(chat);
     }
     private void addComponent(JComponent component) {
         pnlInfo.removeAll();
         pnlInfo.add(component, BorderLayout.CENTER);
+        pnlInfo.repaint();
+        this.validate();
+    }
+     private void addComponent(JDialog component) {
+        pnlInfo.removeAll();
+        pnlInfo.add(component);
         pnlInfo.repaint();
         this.validate();
     }
@@ -72,20 +84,43 @@ public class ChatApp extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         pnlInfo = new javax.swing.JPanel();
+        btnLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
         setSize(new java.awt.Dimension(317, 485));
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
         pnlInfo.setBackground(new java.awt.Color(255, 255, 255));
         pnlInfo.setLayout(new java.awt.BorderLayout());
+
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
+        pnlInfo.add(btnLogin, java.awt.BorderLayout.LINE_START);
+
         getContentPane().add(pnlInfo, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
+         if (loginDialog == null)
+        {
+            loginDialog = new LoginDialog(null,true);
+            loginDialog.setVisible(true);
+            loginDialogController = new LoginDialogController(loginDialog);
+            //pnlLogin.setVisible(true);
+        }
+        
+        //addComponent(loginDialog);
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,6 +158,7 @@ public class ChatApp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogin;
     private javax.swing.JPanel pnlInfo;
     // End of variables declaration//GEN-END:variables
 }
