@@ -5,14 +5,18 @@
  */
 package prog.uni.chatapp.panels.controllers;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComponent;
+import prog.uni.chatapp.panels.Chat;
 //import javafx.event.ActionEvent;
 import prog.uni.chatapp.panels.Login;
 import prog.uni.chatapp.pojo.Cliente;
+import prog.uni.chatapp.views.ChatApp;
 
 /**
  *
@@ -21,6 +25,10 @@ import prog.uni.chatapp.pojo.Cliente;
 public class LoginController {
     private Login login;
     private Cliente cliente;
+    private ChatApp chatfr;
+    private Chat chat;
+    private ChatController chatController;
+    
     public LoginController(Login login) {
         this.login = login;
         initComponents();
@@ -47,5 +55,14 @@ public class LoginController {
         
         cliente = new Cliente(nick, IP_recept, IP);
         System.out.println(cliente.toString());
+        //;
+        this.chatfr.flag(flag((nick == null && IP_recept == null) ? false:true)); //Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException
     }
+    
+
+    public boolean flag(boolean f)
+    {
+        return f;
+    }
+    
 }

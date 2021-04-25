@@ -15,20 +15,36 @@ import java.net.InetAddress;
     Clase cliente contiene: nick( Nombre de quien enviara el msj)
                             IP_recep que es la ip a quien se la enviara (Si se ejecuta en local)
                             IP es un objeto InetAddress para acceder a la IP del usuario que enviara el msj
+                            msg que es el mensaje que enviara el cliente A al cliente B
 */
 public class Cliente {
     private String Nick;
     private InetAddress IP_recep;
     private InetAddress IP;
-
+    private String msg;
     public Cliente() {}
 
     public Cliente(String Nick, InetAddress IP_recep, InetAddress IP) {
         this.Nick = Nick;
         this.IP_recep = IP_recep;
+        this.IP = IP; 
+    }
+    
+    public Cliente(String Nick, InetAddress IP_recep, InetAddress IP, String msg) {
+        this.Nick = Nick;
+        this.IP_recep = IP_recep;
         this.IP = IP;
+        this.msg = msg;
     }
 
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+    
     public String getNick() {
         return Nick;
     }
