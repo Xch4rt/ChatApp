@@ -9,9 +9,6 @@ import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,11 +22,12 @@ import prog.uni.chatapp.server.Server;
  *
  * @author Pablo
  */
-public class ChatController implements Runnable, PropertyChangeListener{
+public class ChatController implements /*Runnable,*/ PropertyChangeListener{
     private Chat chatpnl;
     private Cliente cliente;
     private IFChat inChat;
     private Server server;
+    private LoginController loginC;
     private String nick, recept;
     
 
@@ -37,9 +35,10 @@ public class ChatController implements Runnable, PropertyChangeListener{
     
     
     public ChatController(Chat chatpnl) 
-    {    
+    {   
+        this.chatpnl = chatpnl;
         initComponents();
-        inChat = new IFChat();
+        inChat = new IFChat();// esto da error
         server = new Server(9999);
         server.addPChangeListener(this);
         Thread t = new Thread(server);
@@ -58,52 +57,54 @@ public class ChatController implements Runnable, PropertyChangeListener{
                 Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        Thread miHilo = new Thread(this);
-        miHilo.start();
+        /*Thread miHilo = new Thread(this);
+        miHilo.start();*/
     }
     
     private void SendEventActionListener(ActionEvent e) throws IOException
     {
-        Socket mySocket = new Socket(cliente.getIP().toString(), 9999);
+        String msj = cliente.getNick()+": "+chatpnl.getTxtMessage().getText()+"\n";
         
-        Cliente dataClient = new Cliente();
-        dataClient.setNick(cliente.getNick());
-        dataClient.setIP(cliente.getIP());
-        dataClient.setMsg(chatpnl.getTxtMessage().getText());
+        chatpnl.getTxtAreaMessages().append(msj);
+        Cliente clienteSend = new Cliente(9999, msj);
+        Thread t = new Thread(clienteSend);
         
-        ObjectOutputStream packageD = new ObjectOutputStream(mySocket.getOutputStream());
-        packageD.writeObject(dataClient);
+        t.start();
         
-        mySocket.close();
+        
+        //chatpnl.setTxtAreaMessages();
+        //Socket mySocket = new Socket(cliente.getIP().toString(), 9999);
+        
+        
     }
 
-    @Override
-    public void run() {
-        try {
-            //    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            ServerSocket serverClient = new ServerSocket(9090);
-            Socket cliente;
-            Cliente clienteR;
-            
-            while (true)
-            {
-                cliente = serverClient.accept();
-                
-                ObjectInputStream flujoEntrada = new ObjectInputStream(cliente.getInputStream());
-                
-                clienteR = (Cliente) flujoEntrada.readObject();
-                
-                chatpnl.getTxtAreaMessages().append("\n"+clienteR+": "+clienteR.getMsg()+" ");
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        
-    }
+//    @Override
+//    public void run() {
+//        try {
+//            //    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            ServerSocket serverClient = new ServerSocket(9090);
+//            Socket cliente;
+//            Cliente clienteR;
+//            
+//            while (true)
+//            {
+//                cliente = serverClient.accept();
+//                
+//                ObjectInputStream flujoEntrada = new ObjectInputStream(cliente.getInputStream());
+//                
+//                clienteR = (Cliente) flujoEntrada.readObject();
+//                
+//                chatpnl.getTxtAreaMessages().append("\n"+clienteR+": "+clienteR.getMsg()+" ");
+//            }
+//        } catch (IOException ex) {
+//            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//        
+//        
+//    }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {

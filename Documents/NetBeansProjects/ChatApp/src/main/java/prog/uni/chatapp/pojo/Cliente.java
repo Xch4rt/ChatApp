@@ -27,6 +27,7 @@ public class Cliente implements Runnable {
     private InetAddress IP_recep;
     private InetAddress IP;
     private String msg;
+    private int port;
     public Cliente() {}
 
     public Cliente(String Nick, InetAddress IP_recep, InetAddress IP) {
@@ -41,7 +42,11 @@ public class Cliente implements Runnable {
         this.IP = IP;
         this.msg = msg;
     }
-
+    public Cliente(int port, String msj)
+    {
+        this.port = port;
+        this.msg = msj;
+    }
     public String getMsg() {
         return msg;
     }
@@ -86,7 +91,7 @@ public class Cliente implements Runnable {
             
             DataOutputStream dos;
             
-            Socket mySocket = new Socket();
+            Socket mySocket = new Socket(IP_recep, port);
             
             dos = new DataOutputStream(mySocket.getOutputStream());
             

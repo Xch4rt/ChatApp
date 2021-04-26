@@ -6,33 +6,46 @@
 
 package prog.uni.chatapp.panels;
 
-import java.awt.BorderLayout;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import prog.uni.chatapp.panels.controllers.ChatController;
+import prog.uni.chatapp.pojo.Cliente;
+import prog.uni.chatapp.server.Server;
+import prog.uni.chatapp.views.ChatApp;
 
 /**
  *
  * @author Pablo
  */
-public class IFChat extends javax.swing.JInternalFrame {
-    private Chat chat;
+public class IFChat extends javax.swing.JInternalFrame implements PropertyChangeListener {
+    private ChatApp chatp;
     private ChatController chatController;
-    
+    private Cliente cliente;
+    private Server server;
+  
     /** Creates new form IFChat */
     public IFChat() {
         initComponents();
+        //inChat = new IFChat();// esto da error
+        chatp = new ChatApp();
+        server = new Server(9999);
+        server.addPChangeListener(this);
+        Thread t = new Thread(server);
+        t.start();
+        //addPnl();
     }
-    private void addPnl()
-    {
-        pnlInfo.removeAll();
-        if (chat == null)
-        {
-            chat = new Chat();
-            chatController = new ChatController(chat);
-        }
-        pnlInfo.add(chat, BorderLayout.CENTER);
-        validate();
-        repaint();
-    }
+//    private void addPnl()
+//    {
+//        pnlInfo.removeAll();
+//        if (chat == null)
+//        {
+//            chat = new Chat();
+//            chatController = new ChatController(chat);// esto
+//        }
+//        pnlInfo.add(chat, BorderLayout.CENTER);
+//        validate();
+//        repaint();
+//    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -41,21 +54,107 @@ public class IFChat extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        pnlInfo = new javax.swing.JPanel();
+        pnlCenter = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtAreaMessages = new javax.swing.JTextArea();
+        pnltop = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        pnlTxtMessage = new javax.swing.JPanel();
+        txtMessage = new javax.swing.JTextField();
+        btnSend = new javax.swing.JButton();
 
         setMaximizable(true);
         setResizable(true);
 
-        pnlInfo.setLayout(new java.awt.BorderLayout());
-        getContentPane().add(pnlInfo, java.awt.BorderLayout.CENTER);
+        pnlCenter.setLayout(new java.awt.BorderLayout());
+
+        txtAreaMessages.setEditable(false);
+        txtAreaMessages.setColumns(20);
+        txtAreaMessages.setRows(5);
+        jScrollPane1.setViewportView(txtAreaMessages);
+
+        pnlCenter.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(pnlCenter, java.awt.BorderLayout.CENTER);
+
+        pnltop.setBackground(new java.awt.Color(255, 255, 255));
+        pnltop.setLayout(new java.awt.GridBagLayout());
+
+        jLabel1.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel1.setText("Usuario:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 6, 31);
+        pnltop.add(jLabel1, gridBagConstraints);
+
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel2.setText("Para:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 6, 31);
+        pnltop.add(jLabel2, gridBagConstraints);
+
+        getContentPane().add(pnltop, java.awt.BorderLayout.PAGE_START);
+
+        pnlTxtMessage.setBackground(new java.awt.Color(153, 255, 255));
+        pnlTxtMessage.setLayout(new java.awt.GridBagLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 27.0;
+        gridBagConstraints.weighty = 15.0;
+        gridBagConstraints.insets = new java.awt.Insets(14, 26, 14, 26);
+        pnlTxtMessage.add(txtMessage, gridBagConstraints);
+
+        btnSend.setText("Send");
+        btnSend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSendActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 9, 0, 9);
+        pnlTxtMessage.add(btnSend, gridBagConstraints);
+
+        getContentPane().add(pnlTxtMessage, java.awt.BorderLayout.PAGE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
+        // TODO add your handling code here:
+        String msg = chatp.getChatApp().getNick()+": "+txtMessage.getText()+"\n";
+        //String msj = cliente.getNick().toString()+": "+txtMessage.getText()+"\n";
+        System.out.println(msg.equals(null));
+        txtAreaMessages.append(msg);
+        Cliente clienteSend = new Cliente(9999, msg);
+        Thread t = new Thread(clienteSend);
+        
+        t.start();
+    }//GEN-LAST:event_btnSendActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel pnlInfo;
+    private javax.swing.JButton btnSend;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel pnlCenter;
+    private javax.swing.JPanel pnlTxtMessage;
+    private javax.swing.JPanel pnltop;
+    private javax.swing.JTextArea txtAreaMessages;
+    private javax.swing.JTextField txtMessage;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        txtAreaMessages.append((String) evt.getNewValue());
+    }
 
 }

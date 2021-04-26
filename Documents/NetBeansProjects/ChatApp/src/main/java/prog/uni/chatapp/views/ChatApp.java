@@ -42,7 +42,12 @@ public class ChatApp extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         chatControllerP = new ChatAppController(this);
     }
-
+    
+    
+    public ChatAppController getChatApp()
+    {
+        return chatControllerP;
+    }
     public JDesktopPane getDkCont() {
         return dkCont;
     }

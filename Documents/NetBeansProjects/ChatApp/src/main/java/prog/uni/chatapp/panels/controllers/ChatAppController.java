@@ -20,6 +20,12 @@ public class ChatAppController {
     private LoginDialog loginD;
     private LoginController logC;
     
+    private String nick;
+    
+    public String getNick()
+    {
+        return nick;
+    }
     
     public ChatAppController(ChatApp chatApp) {
         this.chatApp = chatApp;
