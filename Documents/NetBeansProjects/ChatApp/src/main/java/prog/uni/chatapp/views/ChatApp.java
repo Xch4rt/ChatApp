@@ -79,6 +79,12 @@ public class ChatApp extends javax.swing.JFrame {
     public void setMnuOptions(JMenu mnuOptions) {
         this.mnuOptions = mnuOptions;
     }
+
+    public ChatController getChatController() {
+        return chatController;
+    }
+    
+    
     
 //    private void addPnlChat(boolean condition)
 //    {

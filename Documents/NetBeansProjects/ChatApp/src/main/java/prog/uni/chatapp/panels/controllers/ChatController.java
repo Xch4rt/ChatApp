@@ -32,6 +32,10 @@ public class ChatController implements /*Runnable,*/ PropertyChangeListener{
     
 
     public ChatController() {}
+
+    public Cliente getCliente() {
+        return cliente;
+    }
     
     
     public ChatController(Chat chatpnl) 

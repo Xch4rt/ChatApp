@@ -22,6 +22,7 @@ public class IFChat extends javax.swing.JInternalFrame implements PropertyChange
     private ChatController chatController;
     private Cliente cliente;
     private Server server;
+    private Chat chatpnl;
   
     /** Creates new form IFChat */
     public IFChat() {
@@ -128,9 +129,10 @@ public class IFChat extends javax.swing.JInternalFrame implements PropertyChange
 
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
         // TODO add your handling code here:
-        String msg = chatp.getChatApp().getNick()+": "+txtMessage.getText()+"\n";
+        //String msg = chatp.getChatController().getCliente().getNick()+": "+txtMessage.getText()+"\n";
+        String msg= chatp.getChatApp().getNick()+": "+txtMessage.getText()+"\n";
         //String msj = cliente.getNick().toString()+": "+txtMessage.getText()+"\n";
-        System.out.println(msg.equals(null));
+        //System.out.println(msg.equals(null));
         txtAreaMessages.append(msg);
         Cliente clienteSend = new Cliente(9999, msg);
         Thread t = new Thread(clienteSend);
