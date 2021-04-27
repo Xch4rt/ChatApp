@@ -20,11 +20,11 @@ public class ChatAppController {
     private LoginDialog loginD;
     private LoginController logC;
     
-    private String nick;
+    private String nick; // le podria pasar por parametro un to string de la clase cliente getUser o desde el jtextfield con un get text pero de igual manera da error
     
     public String getNick()
     {
-        return nick;
+        return nick;// deberia de funcionar si acceso atraves de la clase cliente u obteniendo desde el jtextfield pero da error null
     }
     
     public ChatAppController(ChatApp chatApp) {
