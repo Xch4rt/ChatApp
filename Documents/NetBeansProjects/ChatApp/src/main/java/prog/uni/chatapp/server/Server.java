@@ -56,7 +56,7 @@ public class Server implements Runnable {
                 dis = new DataInputStream(mySocket.getInputStream());
                 String msh = dis.readUTF();
                 pcs.firePropertyChange("Msg:", msg, msh);
-                
+                System.out.println("Si estoy aqui es porque todo piola jaja"); // Si esto sale vamos piolas
                 
                 
                 
