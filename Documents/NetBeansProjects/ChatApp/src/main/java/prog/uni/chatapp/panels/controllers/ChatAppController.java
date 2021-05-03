@@ -24,7 +24,7 @@ public class ChatAppController {
     
     public String getNick()
     {
-        return nick;// deberia de funcionar si acceso atraves de la clase cliente u obteniendo desde el jtextfield pero da error null
+        return "Cliente";// deberia de funcionar si acceso atraves de la clase cliente u obteniendo desde el jtextfield pero da error null
     }
     
     public ChatAppController(ChatApp chatApp) {
