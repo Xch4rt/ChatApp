@@ -24,19 +24,19 @@ import java.util.logging.Logger;
 */
 public class Cliente implements Runnable {
     private String Nick;
-    private InetAddress IP_recep;
+    private String IP_recep;
     private InetAddress IP;
     private String msg;
     private int port;
     public Cliente() {}
 
-    public Cliente(String Nick, InetAddress IP_recep, InetAddress IP) {
+    public Cliente(String Nick, String IP_recep, InetAddress IP) {
         this.Nick = Nick;
         this.IP_recep = IP_recep;
         this.IP = IP; 
     }
     
-    public Cliente(String Nick, InetAddress IP_recep, InetAddress IP, String msg) {
+    public Cliente(String Nick, String IP_recep, InetAddress IP, String msg) {
         this.Nick = Nick;
         this.IP_recep = IP_recep;
         this.IP = IP;
@@ -63,11 +63,11 @@ public class Cliente implements Runnable {
         this.Nick = Nick;
     }
 
-    public InetAddress getIP_recep() {
+    public String getIP_recep() {
         return IP_recep;
     }
 
-    public void setIP_recep(InetAddress IP_recep) {
+    public void setIP_recep(String IP_recep) {
         this.IP_recep = IP_recep;
     }
 
